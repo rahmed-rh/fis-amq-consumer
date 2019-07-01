@@ -1,0 +1,40 @@
+metadata:
+  labels:
+    app: ivo-fis-consumer
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ivo-fis-consumer
+    spec:
+      containers:
+        - 
+          resources:
+            requests:
+              cpu: 
+              memory: 1Gi
+            limits:
+              cpu: 
+              memory: 1Gi
+          env:
+          - name: ACTIVEMQ_SERVICE_NAME
+            value: broker-amq-headless
+          - name: ACTIVEMQ_SERVICE_PORT
+            value: 61617
+          - name: ACTIVEMQ_BROKER_USERNAME
+            value: amq-demo-user
+          - name: ACTIVEMQ_BROKER_PASSWORD
+            value: passw0rd
+          - name: ACTIVEMQ_POOL_MAX_CONNECTIONS
+            value: 10
+          - name: JAVA_DIAGNOSTICS
+            value: true
+          - name: CURRENT_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: CURRENT_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
